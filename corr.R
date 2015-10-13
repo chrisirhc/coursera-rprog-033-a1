@@ -12,7 +12,7 @@ corr <- function(directory, threshold = 0) {
   
   rows <- vector(mode = "numeric")
   
-  for(i in 1:323) {
+  for(i in 1:332) {
     fileName <- sprintf('%03d', i)
     path <- paste(directory, '/', fileName, '.csv', sep = '')
     newData <- read.csv(path)
@@ -21,7 +21,10 @@ corr <- function(directory, threshold = 0) {
         !is.na(newData$sulfate) & !is.na(newData$nitrate),])
     
     if(nobs >= threshold & nobs > 0) {
-      rows <- append(rows, cor(newData$nitrate, newData$sulfate, use = "complete.obs"))
+      rows <- append(rows,
+                     cor(newData$nitrate,
+                         newData$sulfate,
+                         use = "complete.obs"))
     }
   }
   
